@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "todocount",
+    "slug": "todocount",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "todocount"
+}
