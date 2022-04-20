@@ -1,47 +1,87 @@
 import * as React from 'react'
-import { Text, View, StyleSheet, TextInput, Button } from 'react-native'
+import { Text, View, StyleSheet, Button, TextInput, ListView } from 'react-native'
 import Constants from 'expo-constants'
 import DatePicker from 'react-native-datepicker'
 
-// import ListGroup from "react-bootstrap";
-
 // You can import from local files
-//import AssetExample from './components/AssetExample';
+import AssetExample from './components/AssetExample'
 
-// or any pure javascript modules available in npm
-//import { Card } from 'react-native-paper';
 
-export default class App extends React.Component {
-  state={
-    text: "",
-    time:'',
-    date: '',
-    todo: []
-  }
-  onPress=()=>{
-    console.log(target.text.value);
-    this.setState({text:this.state.text})
-  }
-  addTodo = (event) => {
-    event.preventDefault();
-    const data = event.target,
-      newTodo = {
-      text: data.text.value,
-      time: data.time.value,
-      date: data.date.value,
-      todoList: []
+class WeatherProject extends React.Component{
 
-    };this.state.text;
-    // atualizando a array, mas n dando re-render
-    this.state.todo.push(newTodo);
-    this.setState({
-      todoList: this.state.todoList
-    })
-    
-    /* var arr = this.state.todoList;
-    arr.push(newTodo); */
-    this.setState({todoList: todoList, text: "", date:'', time:''});
+  constructor (props) {
+    super(props);
+    this.state={
+        From:'',
+        To:'', 
+        str:[],
+        
+    }
   }
+
+ changeText=(from, date)=>{
+   this.setState({from, date})
+   
+
+ }
+ onPress = ()=>{
+  this.setState({str: [this.state.from, this.state.date]})
+ }
+
+  render(){
+return (
+        
+          <View style={styles.container}>
+              <Text style={styles.paragraph}>Countdown</Text>
+              <TextInput placeholder="Adicione o título " id="from" style={styles.fromField} onChangeText={this.changeText} /> 
+              <DatePicker style={{borderWidth:2, borderColor:'skyblue', margin:10, backgroundColor: '#fff'}}
+                      /*time={(time)=> setTime(time)}*/ // Initial date from state
+                      mode="datetime" // The enum of date, datetime and time
+                      placeholder=""
+                      id="date"
+                      minDate="14-04-2022"
+                      value={this.state.date}
+                      onDateChange={this.changeText}      
+                    />
+              <Button
+                title={"Add"}
+                color="skyblue"
+                onPress={this.onPress}
+                ></Button>
+
+                <Text>{this.state.str}</Text>
+                
+          </View>
+         
+    );
+  }
+}
+
+
+export default WeatherProject
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingTop: Constants.statusBarHeight,
+    alignItems: 'center',
+    padding: 8,
+    margin: 1,
+    backgroundColor: '#1E1A3C',
+  },
+  fromField: {
+    backgroundColor: '#FFF',
+  },
+  paragraph: {
+    fontWeight: 'bold',
+    fontSize: 30,
+    color: 'white',
+    justifyContent: 'center',
+    padding: 20,
+  },
+});
+
 /*
   deleteTodo = (event) => {
     event.preventDefault();
@@ -63,48 +103,7 @@ export default class App extends React.Component {
     })
   }*/
   
-  render() {
-    console.log(this.state.todoList)
-    return (
-      <>
-        <View style={styles.container}>
-          <Text style={styles.paragraph}>
-            Countdown
-          </Text>
-          <TextInput 
-            
-            style={styles.inputStyle}
-            onChangeText={(text) => this.setState({text})}
-            value={this.state.text}
-          />
-          <DatePicker
-            style={{borderWidth:2, borderColor:'skyblue', margin:10, backgroundColor: '#fff'}}
-            /*time={(time)=> setTime(time)}*/ // Initial date from state
-            mode="date" // The enum of date, datetime and time
-            placeholder=""
-            minDate="14-04-2022"
-            value={this.state.date}
-                  
-          />
-          <DatePicker
-            style={{borderWidth:2, borderColor:'skyblue', margin:10, backgroundColor: '#fff'}}
-            /*time={(time)=> setTime(time)}*/ // Initial date from state
-            mode="time" // The enum of date, datetime and time
-            placeholder=""
-            minDate="14-04-2022"
-            value={this.state.time}
-                  
-          />
-          <Button 
-            title="Add Todo"
-            onPress={this.onPress}
-          />
-          
-          <Text>{this.state.todo} </Text> 
-          {/*at this.state.todo.time*/} {/* , date: this.state.todo.date*/}
-          {/* this.renderTodos() */}
-        </View>
-      </>
+  
 
       /* <ListGroup>
       {
@@ -123,41 +122,11 @@ export default class App extends React.Component {
           })
         }
       </ListGroup> */
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    alignItems: 'center',
-    padding: 8,
-    margin: 1,
-    backgroundColor: '#1E1A3C',
-  },
-  todos:{
-    fontWeight: 'bold',
-    fontSize: 25,
-    padding: 5,
-  },
-  paragraph: {
-    fontWeight: 'bold',
-    fontSize: 30,
-    color: 'white',
-    justifyContent: 'center',
-
-  },
-  inputStyle: {
     
-    height: 40,
-    width: '100%',
-    borderColor: "gray",
-    backgroundColor: '#fff',
-    borderWidth: 1, 
-  },
-});
+  
+
+
+
  //Aprendizados: Achar formas de tornar coisas simples dinâmicas, para atender os requisitos, e alterar os seus comportamentos 
     //Consigo facilitar funções
     //Lembrar de usar console.log para verificar o comportamento das modificações antes de implementar 
