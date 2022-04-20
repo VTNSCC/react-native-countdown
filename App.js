@@ -7,7 +7,7 @@ import DatePicker from 'react-native-datepicker'
 import AssetExample from './components/AssetExample'
 
 
-class WeatherProject extends React.Component{
+class CountdownProject extends React.Component{
 
   constructor (props) {
     super(props);
@@ -19,14 +19,14 @@ class WeatherProject extends React.Component{
     }
   }
 
- changeText=(from, date)=>{
-   this.setState({from, date})
-   
+changeText=(from, date)=>{
+  this.setState({from, date})
+  
 
- }
- onPress = ()=>{
+}
+onPress = ()=>{
   this.setState({str: [this.state.from, this.state.date]})
- }
+}
 
   render(){
 return (
@@ -48,17 +48,15 @@ return (
                 color="skyblue"
                 onPress={this.onPress}
                 ></Button>
-
                 <Text>{this.state.str}</Text>
                 
           </View>
-         
     );
   }
 }
 
 
-export default WeatherProject
+export default CountdownProject;
 
 const styles = StyleSheet.create({
   container: {
@@ -123,11 +121,9 @@ const styles = StyleSheet.create({
         }
       </ListGroup> */
     
-  
+ //Aprendizados: Achar formas de tornar coisas simples dinâmicas, para atender os requisitos, e 
+ // alterar os seus comportamentos 
 
-
-
- //Aprendizados: Achar formas de tornar coisas simples dinâmicas, para atender os requisitos, e alterar os seus comportamentos 
     //Consigo facilitar funções
     //Lembrar de usar console.log para verificar o comportamento das modificações antes de implementar 
     /*Ex:
